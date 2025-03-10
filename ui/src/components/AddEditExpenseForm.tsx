@@ -21,7 +21,6 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Input } from "@/components/ui/input";
-import { useToast } from "@/hooks/use-toast";
 import { CalendarIcon } from "lucide-react";
 import { format } from "date-fns";
 import { cn } from "@/lib/utils";
@@ -61,7 +60,6 @@ const formSchema = z.object({
 export function AddEditExpenseForm({ isEditing }: { isEditing: boolean }) {
   const router = useNavigate();
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const { toast } = useToast();
   const [products, setProducts] = useState<Product[]>([]);
 
   // Initialize form
@@ -81,7 +79,17 @@ export function AddEditExpenseForm({ isEditing }: { isEditing: boolean }) {
 
   useEffect(() => {
     getAllProducts().then((e) => {
-      setProducts(e);
+      const products: Product[] = e.map((e) => {
+        return {
+          id: e.id.toString(),
+          category: e.category,
+          unitOfMeasure: e.u_o_m,
+          status: e.status,
+          name: e.name,
+        };
+      });
+
+      setProducts(products);
     });
   }, []);
 
@@ -122,7 +130,7 @@ export function AddEditExpenseForm({ isEditing }: { isEditing: boolean }) {
     };
     console.log(expense);
 
-    addNewExpense(expense).then((e) => {
+    addNewExpense(expense).then(() => {
       router("/");
     });
   }
