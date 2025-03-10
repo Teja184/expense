@@ -64,6 +64,7 @@ export function ProductManagement() {
 
       <AddEditProductModal
         isOpen={isAddProductModalOpen}
+        product={null}
         onClose={() => setIsAddProductModalOpen(false)}
         categories={categories}
       />
