@@ -25,7 +25,6 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-import { useToast } from "@/hooks/use-toast";
 import { Category } from "@/types";
 import { addNewInventory } from "@/api/inventoryApi";
 
@@ -67,7 +66,6 @@ export function AddEditInventoryModal({
   inventoryItem,
 }: AddEditInventoryModalProps) {
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const { toast } = useToast();
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -106,7 +104,7 @@ export function AddEditInventoryModal({
           category_name: values.category,
           unit_of_measure: values.unitOfMeasure,
           current_stock: values.stockQuantity,
-        }).then((e) => {
+        }).then(() => {
           onClose();
         });
       }
