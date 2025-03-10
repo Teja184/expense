@@ -75,7 +75,7 @@ export function InventoryTable({ filters }: InventoryTableProps) {
     });
   };
 
-  const handleUpdateStock = (id: string) => {
+  const handleUpdateStock = () => {
     // Implement stock update functionality
     toast({
       title: "Stock update",
@@ -122,7 +122,7 @@ export function InventoryTable({ filters }: InventoryTableProps) {
                     item.stockStatus === "Sufficient"
                       ? "default"
                       : item.stockStatus === "Low"
-                      ? "warning"
+                      ? "outline"
                       : "destructive"
                   }
                 >
@@ -146,7 +146,7 @@ export function InventoryTable({ filters }: InventoryTableProps) {
                       Delete
                     </DropdownMenuItem>
                     <DropdownMenuItem
-                      onClick={() => handleUpdateStock(item.id)}
+                      onClick={() => handleUpdateStock()}
                     >
                       Update Stock
                     </DropdownMenuItem>
