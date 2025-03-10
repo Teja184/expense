@@ -1,4 +1,3 @@
-import { Inventory } from "@/types"
 import { apiClient } from "./apiClient"
 
 export interface InventoryResponse {

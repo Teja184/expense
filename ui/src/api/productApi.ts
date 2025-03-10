@@ -1,9 +1,8 @@
-import { Product } from "@/types";
 import { apiClient } from "./apiClient"
 
 
 export interface ProductResponse {
-    id: number;
+    id: string;
     name: string;
     u_o_m: string;
     category: string;
@@ -23,7 +22,7 @@ interface GetProductFilters {
     search: string,
 }
 
-export const getAllProducts = async (filters: GetProductFilters)    => {
+export const getAllProducts = async (filters?: GetProductFilters)    => {
     const resp = await  apiClient.get<ProductResponse[]>("/products", {
         params: filters
     })

@@ -1,4 +1,3 @@
-import { data } from "react-router";
 import { apiClient } from "./apiClient"
 
 export interface ExpenseResponse {
