@@ -38,7 +38,7 @@ const formSchema = z.object({
   unitOfMeasure: z.string().min(1, {
     message: "Please enter a unit of measure.",
   }),
-  status: z.enum(["active", "inactive"]),
+  status: z.enum(["1", "0"]),
 });
 
 type AddEditProductModalProps = {
@@ -62,7 +62,7 @@ export function AddEditProductModal({
       name: "",
       category: "",
       unitOfMeasure: "",
-      status: "active",
+      status: "1",
     },
   });
 
