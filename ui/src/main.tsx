@@ -4,7 +4,6 @@ import "./index.css";
 import App from "./app.tsx";
 import { BrowserRouter, Routes, Route } from "react-router";
 import { pageRoutes } from "./page.tsx";
-import AddEditExpensePage from "./components/EditExpensePage.tsx";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
