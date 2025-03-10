@@ -21,14 +21,7 @@ import { AddEditProductModal } from "./AddEditProductModal";
 import { useToast } from "../hooks/use-toast";
 import { getAllProducts } from "@/api/productApi";
 import { mapProducts } from "@/utils/mapProducts";
-
-type Product = {
-  id: string;
-  name: string;
-  category: string;
-  unitOfMeasure: string;
-  status: "1" | "0";
-};
+import { Product } from "@/types";
 
 type ProductTableProps = {
   filters: {
@@ -60,7 +53,7 @@ export function ProductTable({ filters }: ProductTableProps) {
   };
 
   const handleEdit = (product: Product) => {
-    setEditingProduct(product);
+    setEditingProduct(product || null);
   };
 
   const handleDelete = (id: string) => {
