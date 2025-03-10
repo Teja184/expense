@@ -88,7 +88,7 @@ export function VendorTable({ filters }: VendorTableProps) {
     });
   };
 
-  const handleViewDetails = (id: string) => {
+  const handleViewDetails = () => {
     // Implement view details functionality
     toast({
       title: "View details",
@@ -154,7 +154,7 @@ export function VendorTable({ filters }: VendorTableProps) {
                       Delete
                     </DropdownMenuItem>
                     <DropdownMenuItem
-                      onClick={() => handleViewDetails(vendor.id)}
+                      onClick={() => handleViewDetails()}
                     >
                       View Details
                     </DropdownMenuItem>
