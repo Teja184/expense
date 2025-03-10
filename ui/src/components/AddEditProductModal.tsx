@@ -25,8 +25,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-import { useToast } from "../hooks/use-toast";
-import { Category } from "@/types";
+import { Category, Product } from "@/types";
 import { addNewProduct } from "@/api/productApi";
 
 const formSchema = z.object({
@@ -42,18 +41,10 @@ const formSchema = z.object({
   status: z.enum(["active", "inactive"]),
 });
 
-type Product = {
-  id: string;
-  name: string;
-  category: string;
-  unitOfMeasure: string;
-  status: "active" | "inactive";
-};
-
 type AddEditProductModalProps = {
   isOpen: boolean;
   onClose: () => void;
-  product?: Product | null;
+  product: Product | null;
   categories: Category[];
 };
 
@@ -64,7 +55,6 @@ export function AddEditProductModal({
   categories,
 }: AddEditProductModalProps) {
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const { toast } = useToast();
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -89,7 +79,7 @@ export function AddEditProductModal({
         name: "",
         category: "",
         unitOfMeasure: "",
-        status: "active",
+        status: "1",
       });
     }
   }, [product, form]);
@@ -102,8 +92,8 @@ export function AddEditProductModal({
       product_name: values.name,
       cat_id: Number(values.category),
       unit_of_measure: values.unitOfMeasure,
-      active_status: values.status === "active",
-    }).then((e) => {
+      active_status: values.status === "1",
+    }).then(() => {
       onClose();
     });
   }
@@ -189,8 +179,8 @@ export function AddEditProductModal({
                       </SelectTrigger>
                     </FormControl>
                     <SelectContent>
-                      <SelectItem value="active">Active</SelectItem>
-                      <SelectItem value="inactive">Inactive</SelectItem>
+                      <SelectItem value="1">Active</SelectItem>
+                      <SelectItem value="0">Inactive</SelectItem>
                     </SelectContent>
                   </Select>
                   <FormMessage />
