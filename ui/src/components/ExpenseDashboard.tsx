@@ -4,8 +4,15 @@ import { FiltersSection } from "./FiltersSection";
 import { ExpenseTable } from "./ExpenseTable";
 import { useNavigate } from "react-router";
 
+interface FilterState {
+  dateRange: { from: Date | null; to: Date | null };
+  category: string;
+  vendor: string;
+  search: string;
+}
+
 export function ExpenseDashboard() {
-  const [filters, setFilters] = useState({
+  const [filters, setFilters] = useState<FilterState>({
     dateRange: { from: null, to: null },
     category: "",
     vendor: "",
