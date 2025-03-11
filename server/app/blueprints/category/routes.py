@@ -44,11 +44,10 @@ class CateogoryList(Resource):
             db.session.commit()
 
             resp = ctg.to_dict()
-            resp.status_code = 201
         except IntegrityError as ie:
             if ie.statement.find("UNIQUE constraint failed"):
                 return "category alread exists", 403
         except Exception:
             return "failed to add", 500
 
-        return resp
+        return resp, 201

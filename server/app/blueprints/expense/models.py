@@ -6,6 +6,7 @@ from sqlalchemy import (
     ForeignKey,
     DECIMAL,
     TIMESTAMP,
+    Computed,
     func,
 )
 
@@ -36,7 +37,7 @@ class Expense(db.Model):
     purchace_unit = mapped_column(DECIMAL(10, 2), nullable=False)
     # total_price DECIMAL(10, 2) GENERATED ALWAYS AS (unit_price * purchase_unit) STORED,
     total_price = mapped_column(
-        DECIMAL(10, 2), server_default="unit_price * purchace_unit"
+        DECIMAL(10, 2), Computed("unit_price * purchace_unit", persisted=True)
     )
     # purchase_date DATE NOT NULL,
     purchace_date = mapped_column(TIMESTAMP(timezone=True), default=func.now())

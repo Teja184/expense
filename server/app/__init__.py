@@ -2,6 +2,7 @@ from flask import Flask
 from app.extensions import db, migrate, login_manager, cors, api
 import config as config
 from app.blueprints.auth.models import User
+import os
 
 
 @login_manager.user_loader
@@ -11,7 +12,7 @@ def load_user(user_id):
 
 def create_app():
     app = Flask(__name__)
-    app.config.from_object(config.Config)
+    app.config.from_object(config.config_dict.get(os.getenv("FLASK_ENV", "default")))
 
     cors.init_app(app)
     db.init_app(app)
